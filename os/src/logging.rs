@@ -10,9 +10,8 @@ impl Log for SimpleLogger {
         true
     }
     fn log(&self, record: &Record) {
-        if !self.enabled(record.metadata()) {
-            return;
-        }
+        if !self.enabled(record.metadata()) { return; }
+
         let color = match record.level() {
             Level::Error => 31, // Red
             Level::Warn => 93,  // BrightYellow
@@ -20,12 +19,7 @@ impl Log for SimpleLogger {
             Level::Debug => 32, // Green
             Level::Trace => 90, // BrightBlack
         };
-        println!(
-            "\u{1B}[{}m[{:>5}] {}\u{1B}[0m",
-            color,
-            record.level(),
-            record.args(),
-        );
+        println!("\u{1B}[{}m[{:>5}] {}\u{1B}[0m", color, record.level(), record.args());
     }
     fn flush(&self) {}
 }
