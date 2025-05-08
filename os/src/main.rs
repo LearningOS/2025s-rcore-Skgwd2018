@@ -7,10 +7,19 @@
 //!
 //! We then call [`println!`] to display `Hello, world!`.
 
+// 强制要求文档注释：启用后，如果代码中存在没有文档注释（/// 或 //!）的公共项（pub 类型、函数、模块等），编译器会报错（而非警告）。
+// 通常用于库项目，确保代码的公共接口有完整文档。
+// 用于确保所有公共 API 有文档
 #![deny(missing_docs)]
+// 将所有警告视为错误：任何编译器警告（如未使用的变量、废弃的语法等）都会导致编译失败。
+// 用于严格的项目中，确保代码零警告。
+// 用于禁止任何警告
 #![deny(warnings)]
 #![no_std]
 #![no_main]
+// 启用实验性功能：panic_info_message 是一个Nightly 特性，允许在 panic 时获取更详细的错误信息（如 panic 消息）。
+// 仅在使用 Nightly 版本的 Rust 时有效（通过 rustup default nightly 切换）。
+// 启用自定义 panic 处理
 #![feature(panic_info_message)]
 
 use core::arch::global_asm;
